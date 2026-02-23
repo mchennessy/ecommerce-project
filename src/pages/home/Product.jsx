@@ -13,7 +13,7 @@ export function Product({ product, loadCart }) {
         });
         await loadCart();
     }
-    
+
     return (
         <div className="product-container">
             <div className="product-image-container">
@@ -61,7 +61,10 @@ export function Product({ product, loadCart }) {
                 Added
             </div>
 
-            <button className="add-to-cart-button button-primary" onClick={() => addToCart(product.id, quantity)}>
+            <button className="add-to-cart-button button-primary"
+                data-testid="add-to-cart-button"
+                onClick={() => addToCart(product.id, quantity)}
+            >
                 Add to Cart
             </button>
         </div>

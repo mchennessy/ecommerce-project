@@ -1,10 +1,19 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { formatMoney } from '../../utils/money';
 
-export function ProductControl({ product, addToCart }) {
+export function ProductControl({ product, loadCart }) {
     const [quantity, setQuantity] = useState(1);
     const selectQuantity = (e) => setQuantity(Number(e.target.value));
 
+    async function addToCart(productId, quantity) {
+        await axios.post('/api/cart-items', {
+            productId: productId,
+            quantity
+        });
+        await loadCart();
+    }
+    
     return (
         <div className="product-container">
             <div className="product-image-container">

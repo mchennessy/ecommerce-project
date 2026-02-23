@@ -3,6 +3,7 @@ import { formatMoney } from '../../utils/money';
 
 export function ProductControl({ product, addToCart }) {
     const [quantity, setQuantity] = useState(1);
+    const selectQuantity = (e) => setQuantity(Number(e.target.value));
 
     return (
         <div className="product-container">
@@ -28,12 +29,7 @@ export function ProductControl({ product, addToCart }) {
             </div>
 
             <div className="product-quantity-container">
-                <select
-                    value={quantity}
-                    onChange={
-                        (e) => setQuantity(Number(e.target.value))
-                    }
-                >
+                <select value={quantity} onChange={selectQuantity}>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>

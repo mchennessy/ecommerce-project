@@ -9,6 +9,8 @@ export function CheckoutPage({ cart }) {
     const [deliveryOptions, setDeliveryOptions] = useState([]);
     const [paymentSummary, setPaymentSummary] = useState(null);
 
+    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+
     useEffect(() => {
         axios.get('/api/delivery-options?expand=estimatedDeliveryTime').then((response) => {
             setDeliveryOptions(response.data);
@@ -34,7 +36,7 @@ export function CheckoutPage({ cart }) {
 
                     <div className="checkout-header-middle-section">
                         Checkout (<a className="return-to-home-link"
-                            href="/">3 items</a>)
+                            href="/">{totalItems} items</a>)
                     </div>
 
                     <div className="checkout-header-right-section">

@@ -1,6 +1,17 @@
+import axios from 'axios';
 import { formatMoney } from '../../utils/money';
 
-export function ProductsGrid({ products }) {
+export function ProductsGrid({ products, loadCart }) {
+    function addToCart(productId) {
+        axios.post('/api/cart-items', {
+            productId: productId,
+            quantity: 1
+        }).then(() => { 
+            loadCart();
+        });
+    }
+
+
     return (
         <div className="products-grid">
             {products.map((product) => (
@@ -48,7 +59,7 @@ export function ProductsGrid({ products }) {
                         Added
                     </div>
 
-                    <button className="add-to-cart-button button-primary">
+                    <button className="add-to-cart-button button-primary" onClick={() => addToCart(product.id)}>
                         Add to Cart
                     </button>
                 </div>
